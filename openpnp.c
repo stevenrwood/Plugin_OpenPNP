@@ -190,9 +190,11 @@ static void userMCodeExecute (uint_fast16_t state, parser_block_t *gc_block)
         case OpenPNP_FirmwareInfo:
             hal.stream.write("FIRMWARE_NAME:grblHAL ");
             hal.stream.write("FIRMWARE_URL:https%3A//github.com/grblHAL ");
-            hal.stream.write("FIRMWARE_VERSION:" GRBL_VERSION " ");
+            hal.stream.write("FIRMWARE_VERSION:" FIRMWARE_VERSION " ");
+            // FIRMWARE_BUILD was the hand-typed date; the numeric form of the version is what a
+            // client can now compare. The field is kept so the reply shape is unchanged.
             hal.stream.write("FIRMWARE_BUILD:");
-            hal.stream.write(uitoa(GRBL_BUILD));
+            hal.stream.write(uitoa((uint32_t)FIRMWARE_VERSION_NUM));
             hal.stream.write(ASCII_EOL);
             break;
 
